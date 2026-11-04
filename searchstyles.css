@@ -1,0 +1,116 @@
+/*This is for testing before merge*/
+/*Main*/
+.search-header{
+    background-color: rgb(18, 18, 18);
+    display: flex;
+    padding: 20px;
+    align-items: center;
+}
+
+
+/*Header*/
+.search-header h1 a{
+    color: white;
+    text-decoration: none;
+}
+
+.search-header h1 a:hover{
+    color: gray;
+}
+
+
+/*Header Nav*/
+.search-header nav{
+    margin-left: auto;
+}
+.search-header nav a{
+    color: white;
+    text-decoration: none;
+}
+
+.search-header nav a:hover{
+    color: gray;
+}
+
+/*Header Search*/
+.search{
+    border:none;
+    margin-left: 25px;
+}
+
+.button{
+    border:none;
+}
+
+/*Body*/
+body{
+    background-color: #777;
+}
+
+/*main/page layout*/
+.search-main{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+/*Filter*/
+.search-filter{
+    width: 180px;
+    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.filter-group{
+    margin-bottom: 20px;
+}
+
+.filter-group input[type=number]{
+    padding: 8px;
+    width: 35px;
+}
+
+
+/*results*/
+.search-result{
+    flex: 1;
+    min-width: 0;
+}
+
+.result-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+
+/*Card*/
+.card-row{
+    display: flex;
+    gap: 20px
+}
+
+.card{
+    background-color: white;
+    padding: 10px;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    height: 375px;
+}
+
+.card h3{
+    margin-bottom: 200px;
+}
+
+
+/*Footer*/
+.search-footer {
+    padding: 15px;
+    text-align: center;
+    background-color: rgb(18, 18, 18);
+    color: white;
+}
