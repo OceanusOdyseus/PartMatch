@@ -1,3 +1,4 @@
+/*Index/Homepage*/
 :root {
   --color-red:#CD1041;
   --color-black: #000000;
@@ -51,3 +52,5 @@ footer {
     text-align: center;
     padding: 15px;
 }
+
+/*Search Results*/
