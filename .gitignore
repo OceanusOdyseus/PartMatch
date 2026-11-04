@@ -1,0 +1,5 @@
+/data/
+*.ibd
+*.ibdata
+*.log
+*.pid
