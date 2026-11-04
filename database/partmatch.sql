@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2026 at 05:28 PM
+-- Generation Time: Nov 04, 2026 at 05:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,16 +35,22 @@ CREATE TABLE `listings` (
   `part_condition` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
   `location` varchar(50) NOT NULL,
-  `date_time` datetime NOT NULL DEFAULT current_timestamp()
+  `date_time` datetime NOT NULL DEFAULT current_timestamp(),
+  `image1_name` varchar(100) DEFAULT NULL,
+  `image1_data` mediumblob DEFAULT NULL,
+  `image2_name` varchar(100) DEFAULT NULL,
+  `image2_data` mediumblob DEFAULT NULL,
+  `image3_name` varchar(100) DEFAULT NULL,
+  `image3_data` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `listings`
 --
 
-INSERT INTO `listings` (`id`, `seller_id`, `part_id`, `asking_price`, `part_condition`, `status`, `location`, `date_time`) VALUES
-(1, 104, 46, 126, 'new-in-box', 'available', 'Pheonix, NM', '2026-11-04 10:27:33'),
-(2, 103, 46, 100, 'used', 'sold', 'Saint Cloud, MN', '2026-11-04 10:28:15');
+INSERT INTO `listings` (`id`, `seller_id`, `part_id`, `asking_price`, `part_condition`, `status`, `location`, `date_time`, `image1_name`, `image1_data`, `image2_name`, `image2_data`, `image3_name`, `image3_data`) VALUES
+(1, 104, 46, 126, 'new-in-box', 'available', 'Phoenix, NM', '2026-11-04 10:27:33', '', '', '', '', '', ''),
+(2, 103, 46, 100, 'used', 'sold', 'Saint Cloud, MN', '2026-11-04 10:28:15', '', '', '', '', '', '');
 
 --
 -- Indexes for dumped tables
