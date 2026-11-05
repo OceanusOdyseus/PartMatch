@@ -31,6 +31,7 @@ CREATE TABLE `listings` (
   `id` int(11) NOT NULL,
   `seller_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
+  `part_name` varchar(100) NOT NULL,
   `asking_price` decimal(10,0) NOT NULL,
   `part_condition` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
@@ -48,9 +49,9 @@ CREATE TABLE `listings` (
 -- Dumping data for table `listings`
 --
 
-INSERT INTO `listings` (`id`, `seller_id`, `part_id`, `asking_price`, `part_condition`, `status`, `location`, `date_time`, `image1_name`, `image1_data`, `image2_name`, `image2_data`, `image3_name`, `image3_data`) VALUES
-(1, 104, 46, 126, 'new-in-box', 'available', 'Phoenix, NM', '2026-11-04 10:27:33', '', '', '', '', '', ''),
-(2, 103, 46, 100, 'used', 'sold', 'Saint Cloud, MN', '2026-11-04 10:28:15', '', '', '', '', '', '');
+INSERT INTO `listings` (`id`, `seller_id`, `part_id`, `part_name`, `asking_price`, `part_condition`, `status`, `location`, `date_time`, `image1_name`, `image1_data`, `image2_name`, `image2_data`, `image3_name`, `image3_data`) VALUES
+(1, 104, 44, 'Ryzen 7 5800X', 126, 'new-in-box', 'available', 'Phoenix, NM', '2026-11-04 10:27:33', '', '', '', '', '', ''),
+(2, 103, 46, 'Nvidia RTX 3080', 100, 'used', 'sold', 'Saint Cloud, MN', '2026-11-04 10:28:15', '', '', '', '', '', '');
 
 --
 -- Indexes for dumped tables
