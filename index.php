@@ -45,14 +45,14 @@ if (!$result) {
                 <button type="submit">Search</button>
             </form>
 
-            <div class="categories">
+            <!--<div class="categories">  used for quick navigation, feature not yet implemented in search.php 
                 <a href="search.php">GPU</a>
                 <a href="search.php">CPU</a>
                 <a href="search.php">PSU</a>
                 <a href="search.php">RAM</a>
                 <a href="search.php">Storage</a>
                 <a href="search.php">Motherboard</a>
-            </div>
+            </div> -->
         </section>
 
         <section class="recentListings">
@@ -76,7 +76,7 @@ if (!$result) {
                             >
                         <?php } ?>
 
-                        <h3>PC part<?php echo htmlspecialchars($row['part_id']); ?></h3>
+                        <h3>PC part<?php echo htmlspecialchars($row['part_name']); ?></h3>
                         <p>Price: $<?php echo htmlspecialchars($row['asking_price']); ?></p>
                         <p>Condition: <?php echo htmlspecialchars($row['part_condition']); ?></p>
                         <p>Location: <?php echo htmlspecialchars($row['location']); ?></p>
