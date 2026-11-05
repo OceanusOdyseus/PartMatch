@@ -1,3 +1,20 @@
+<?php
+$conn = mysqli_connect("localhost", "root", "", "partmatch");
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM listings";
+
+$result = mysqli_query($conn, $sql);
+
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +77,10 @@
 
 <section class="search-result">
     <div class="result-header">
-        <h3>5 Search Results for "RTX 5090"</h3>
+        <h3>
+            <?php echo mysqli_num_rows($result); ?>
+            Search Results for "RTX 5090"
+        </h3>
         <select>
             <option>Sort: Low to High</option>
             <option>Sort: High to Low</option>
@@ -68,29 +88,14 @@
     </div>
 
     <div class="card-row">
-        <div class="card">
-            <h3>Photo</h3>
-            <p>Name: 4070 ti</p>
-            <p>Price:</p>
-            <p>Condition:</p>
-            <p>Compatable</p>
-        </div>
-
-        <div class="card">
-            <h3>Photo</h3>
-            <p>Name: 4070 super</p>
-            <p>Price:</p>
-            <p>Condition:</p>
-            <p>Not Compatable</p>
-        </div>
-
-        <div class="card">
-            <h3>Photo</h3>
-            <p>Name: 4070</p>
-            <p>Price:</p>
-            <p>Condition:</p>
-            <p>Compatable</p>
-        </div>
+        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+            <div class="card">
+                <h3>PC Part #<?php echo $row['part_id']; ?></h3>
+                <p>Price: $<?php echo $row['asking_price']; ?></p>
+                <p>Condition: <?php echo $row['part_condition']; ?></p>
+                <p>Location: <?php echo $row['location']; ?></p>
+            </div>
+        <?php } ?>
     </div>
 
 </section>
