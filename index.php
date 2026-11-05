@@ -30,7 +30,7 @@ if (!$result) {
     <header>
         <a href="index.php">PartMatch</a>
         <nav>
-            <a href="search.php">Create Listing</a>
+            <a href="create_listing.php">Create Listing</a>
             <a href="#">Profile</a>
         </nav>
     </header>
@@ -78,7 +78,7 @@ if (!$result) {
 
                         <h3>PC part<?php echo htmlspecialchars($row['part_id']); ?></h3>
                         <p>Price: $<?php echo htmlspecialchars($row['asking_price']); ?></p>
-                        <p>Condition: $<?php echo htmlspecialchars($row['part_condition']); ?></p>
+                        <p>Condition: <?php echo htmlspecialchars($row['part_condition']); ?></p>
                         <p>Location: <?php echo htmlspecialchars($row['location']); ?></p>
                     </div>
                 <?php } ?>                
