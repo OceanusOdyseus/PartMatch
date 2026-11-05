@@ -5,7 +5,20 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM listings";
+$search = "";
+
+if (isset($_GET['search'])) {
+    $search = mysqli_real_escape_string($conn, $_GET['search']);
+}
+
+if ($search != "") {
+    $sql = "SELECT * FROM listings
+            WHERE CAST(part_id AS CHAR) LIKE '%$search%'";
+} 
+
+else {
+    $sql = "SELECT * FROM listings";
+}
 
 $result = mysqli_query($conn, $sql);
 
@@ -26,14 +39,14 @@ if (!$result) {
     <header class="search-header">
         <h1><a href="index.php">PartMatch</a></h1>
 
-        <section class="search">
-            <input type="search">
-            <button type="button">Search</button>
-        </section>
+        <form class="search" method="GET" action="search.php">
+            <input type="search" name="search" placeholder="Search for PC parts (Hint: Type ID #)">
+            <button type="submit">Search</button>
+        </form>
 
         <nav>
-            <a href="#">Create Listing</a>
-            <a href="#">&emsp;Profile</a>
+            <a href="create_listing.php">Create Listing</a>
+            <a href="profile.php">&emsp;Profile</a>
         </nav>
 
     </header>
@@ -44,21 +57,26 @@ if (!$result) {
 
         <div class="filter-group">
             <h4>Price</h4>
-            $<input type="number"> min -
-            $<input type="number"> max
+            $<input type="number" min="0"> min -
+            $<input type="number" min="0"> max
 
         </div>
 
         <div class="filter-group">
             <h4>Condition</h4>
-            <input type="checkbox"> Works
-            <input type="checkbox"> Broken
+            <select name="brand">
+                    <option>Select condition</option>
+                    <option>New in Box</option>
+                    <option>Used</option>
+                    <option>Broken</option>
+            </select>
             
         </div>
 
         <div class="filter-group">
             <h4>Brand</h4>
             <select name="brand">
+                <option>Select Brand</option>
                 <option>Intel</option>
                 <option>Nvidia</option>
                 <option>AMD</option>
@@ -79,9 +97,11 @@ if (!$result) {
     <div class="result-header">
         <h3>
             <?php echo mysqli_num_rows($result); ?>
-            Search Results for "RTX 5090"
+            Search Results for
+            <?php echo htmlspecialchars($search); ?>
         </h3>
         <select>
+            <option>Sort: Default</option>
             <option>Sort: Low to High</option>
             <option>Sort: High to Low</option>
         </select>

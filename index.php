@@ -31,7 +31,7 @@ if (!$result) {
         <a href="index.php">PartMatch</a>
         <nav>
             <a href="create_listing.php">Create Listing</a>
-            <a href="#">Profile</a>
+            <a href="profile.php">Profile</a>
         </nav>
     </header>
 
