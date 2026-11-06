@@ -137,24 +137,3 @@ footer {
     margin-top: 40px;
 }
 
-/* Mobile */
-
-@media (max-width: 600px) {
-
-    header {
-        padding: 20px;
-        flex-wrap: wrap;
-		
-    }
-
-    main {
-
-        margin: 20px auto;
-    }
-
-    nav {
-
-        flex-wrap: wrap;
-
-    }
-}
