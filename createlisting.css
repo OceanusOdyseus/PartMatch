@@ -21,8 +21,10 @@ body {
 header {
     background-color: var(--color-black);
     display: flex;
+	flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+	gap: 16px;
     padding: 20px 40px;
     border-bottom: 2px solid var(--color-red);
 }
@@ -34,12 +36,16 @@ header h1 a {
 
 nav {
     display: flex;
-    gap: 15px;
+	flex-wrap: wrap;
+    gap: 8px;
 }
 
 nav a {
-    color: var(--color-white);
+    color: white;
     text-decoration: none;
+	padding: 8px 14px;
+	border-radius: 4px
+	margin-left: auto;
 }
 
 nav a:hover {
