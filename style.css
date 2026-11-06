@@ -152,7 +152,11 @@ footer {
 .listing-container h2 {
     margin-top: 0;
 }
-
+.listing-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
 .form-group input,
 .form-group select {
     background-color: var(--color-white);
