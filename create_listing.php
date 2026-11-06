@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <title>Create Listing - PartMatch</title>
 
-    <link rel="stylesheet" href="createlisting.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
