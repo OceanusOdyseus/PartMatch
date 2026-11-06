@@ -28,7 +28,7 @@ if (!$result) {
 <body>
  
     <header>
-        <a href="index.php">PartMatch</a>
+        <a href="index.php" class="logo">PartMatch</a>
         <nav>
             <a href="create_listing.php">Create Listing</a>
             <a href="profile.php">Profile</a>
@@ -76,7 +76,7 @@ if (!$result) {
                             >
                         <?php } ?>
 
-                        <h3>PC part<?php echo htmlspecialchars($row['part_name']); ?></h3>
+                        <h3>PC part: <?php echo htmlspecialchars($row['part_name']); ?></h3>
                         <p>Price: $<?php echo htmlspecialchars($row['asking_price']); ?></p>
                         <p>Condition: <?php echo htmlspecialchars($row['part_condition']); ?></p>
                         <p>Location: <?php echo htmlspecialchars($row['location']); ?></p>
@@ -84,11 +84,11 @@ if (!$result) {
                 <?php } ?>                
             </div>
         </section>
-
-        <footer>
-        <p>&copy; 2026 PartMatch</p>
-        </footer>
     </main>
+
+    <footer>
+        <p>&copy; 2026 PartMatch</p>
+    </footer>
 </body>
 </html>
 
