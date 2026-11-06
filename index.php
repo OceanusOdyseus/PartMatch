@@ -37,7 +37,7 @@ if (!$result) {
 
     
 
-    <main>
+    <main class="non-search-main">
         <section class="searchBar">
             <form action="search.php" method="GET">
                 <input type="text" name="search"

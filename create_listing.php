@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </nav>
     </header>
 
-    <main>
+    <main class="non-search-main">
 
         <section class="listing-container">
 

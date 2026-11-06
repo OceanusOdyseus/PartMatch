@@ -12,7 +12,15 @@ body {
     color: var(--color-white);
 }
 
-main{
+.search-main{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    flex: 1;
+}
+
+.non-search-main{
     max-width: 700px;
     margin: 40px auto;
     padding: 20px;
@@ -242,14 +250,6 @@ footer {
 }
 
 
-/*main/page layout*/
-.search-main{
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px;
-    flex: 1;
-}
 
 /*Filter*/
 .search-filter{
