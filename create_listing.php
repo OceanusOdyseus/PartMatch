@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     <header>
-        <h1><a href="index.php">PartMatch</a></h1>
+        <h1><a href="index.php" class="logo">PartMatch</a></h1>
 
         <nav>
             <a href="index.php">Home</a>
