@@ -66,7 +66,7 @@ if (!$result) {
         <div class="filter-group">
             <h4>Condition</h4>
             <select name="brand">
-                    <option>Select condition</option>
+                    <option>Select Condition</option>
                     <option>New in Box</option>
                     <option>Used</option>
                     <option>Broken</option>
