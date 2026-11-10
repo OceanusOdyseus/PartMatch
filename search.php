@@ -124,7 +124,6 @@ if (!$result) {
 
 <footer class="search-footer">&copy; 2026 PartMatch</footer>
 
-<link rel="stylesheet" href="searchstyles.css">
 
 
 
