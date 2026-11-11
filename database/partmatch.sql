@@ -31,12 +31,12 @@ CREATE TABLE `listings` (
   `listing_id` int PRIMARY KEY AUTO_INCREMENT,
   `seller_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
-  `asking_price` decimal(10,0) NOT NULL,
+  `asking_price` decimal(10,2) NOT NULL,
   `part_condition` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
   `location` varchar(50) NOT NULL,
   `description` varchar(100) NOT NULL, 
-  'date_time' TIMESTAMP NOT NULL DEFAULT '',
+  `date_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `image1_name` varchar(100) DEFAULT NULL,
   `image1_data` mediumblob DEFAULT NULL,
   `image2_name` varchar(100) DEFAULT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE `listings` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE 'users'(
+CREATE TABLE users(
   user_id INT PRIMARY KEY,
   username VARCHAR(60) NOT NULL,
   email VARCHAR(120) NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE 'users'(
 -- Table structure for table `parts`
 --
 
-CREATE TABLE 'parts'(
+CREATE TABLE parts(
   part_id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(120) NOT NULL,
   category ENUM('CPU', 'GPU', 'Motherboard', 'RAM', 'PSU', 'Storage') NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE 'parts'(
 -- Table structure for table `user_builds`
 --
 
-CREATE TABLE 'user_builds'(
+CREATE TABLE user_builds(
   user_id INT PRIMARY KEY,
   cpu_part_id INT NULL,
   gpu_part_id INT NULL,
@@ -83,13 +83,13 @@ CREATE TABLE 'user_builds'(
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (cpu_part_id) REFERENCES parts(part_id),
   FOREIGN KEY (gpu_part_id) REFERENCES parts(part_id),
-  FOREIGN KEY (motherboard_part_id) REFERENCES parts(part_id),
+  FOREIGN KEY (motherboard_part_id) REFERENCES parts(part_id)
 );
 --
 -- Dumping data for table `parts` (USED AI to generate listings)
 --
 
-INSERT INTO 'parts' (part_id, name, category, brand, socket, memory_type, power_watts) VALUES
+INSERT INTO parts (part_id, name, category, brand, socket, memory_type, power_watts) VALUES
 (1,  'AMD Ryzen 5 7600',                 'CPU', 'AMD',    'AM5',     NULL,   NULL),
 (2,  'AMD Ryzen 7 7800X3D',              'CPU', 'AMD',    'AM5',     NULL,   NULL),
 (3,  'AMD Ryzen 5 5600',                 'CPU', 'AMD',    'AM4',     NULL,   NULL),
@@ -122,7 +122,7 @@ INSERT INTO 'parts' (part_id, name, category, brand, socket, memory_type, power_
 -- Dumping data for table `listings` (USED AI to generate listings)
 --
 
-INSERT INTO 'listings' (seller_id, part_id, asking_price, part_condition, status, location, description, date_time) VALUES
+INSERT INTO listings (seller_id, part_id, asking_price, part_condition, status, location, description, date_time) VALUES
 (101, 2,  329.00, 'new-in-box', 'available', 'Maple Grove, Minnesota', 'Sealed retail box, bought a spare.', NOW() - INTERVAL 1 DAY),
 (101, 7,  189.99, 'used', 'available', 'Maple Grove, Minnesota', 'Ran for six months, no bent pins.', NOW() - INTERVAL 2 DAY),
 (102, 1,  199.00, 'used', 'available', 'Chicago, Illinois', 'Great budget AM5 chip.', NOW() - INTERVAL 3 DAY),
@@ -155,45 +155,12 @@ INSERT INTO 'listings' (seller_id, part_id, asking_price, part_condition, status
 --
 -- Dumping data for table `users`
 --
-INSERT INTO 'users' (user_id, username, email, phone, location) VALUES
+INSERT INTO users (user_id, username, email, phone, location) VALUES
 (101, 'Nicholas Born', 'Born2BGreat@example.com', '243-0943', 'Maple Grove, Minnesota'),
 (102, 'Jordan Michael', 'jordan2Be@example.edu', '672,9021', 'Chicago, Illinios'),
 (103, 'Cash Money', 'rich2rags@example.com', '907-8742', 'Los Angeles, California'),
 (104, 'Henry Holiday', 'HenryHoliday2@example.com', '987-234', 'Richmond, Virginia'),
 (105, 'Leclerc Rozman', 'F1enjoyer294@example.com', '169-3215', 'Portland, Oregon');
-
---
--- Dumping data for table `parts`
---
-INSERT INTO 'parts' (part_id, name, category, brand, socket, memory_type, power_watts) VALUES
-(1,  'AMD Ryzen 5 7600',                 'CPU', 'AMD',    'AM5',     NULL,   NULL),
-(2,  'AMD Ryzen 7 7800X3D',              'CPU', 'AMD',    'AM5',     NULL,   NULL),
-(3,  'AMD Ryzen 5 5600',                 'CPU', 'AMD',    'AM4',     NULL,   NULL),
-(4,  'AMD Ryzen 7 5800X3D',              'CPU', 'AMD',    'AM4',     NULL,   NULL),
-(5,  'Intel Core i5-13600K',             'CPU', 'Intel',  'LGA1700', NULL,   NULL),
-(6,  'Intel Core i7-12700K',             'CPU', 'Intel',  'LGA1700', NULL,   NULL),
-(7,  'ASUS TUF Gaming B650-PLUS',        'Motherboard', 'ASUS',     'AM5',     'DDR5', NULL),
-(8,  'MSI MAG B650 Tomahawk',            'Motherboard', 'MSI',      'AM5',     'DDR5', NULL),
-(9,  'Gigabyte B550 AORUS Elite',        'Motherboard', 'Gigabyte', 'AM4',     'DDR4', NULL),
-(10, 'MSI B550-A PRO',                   'Motherboard', 'MSI',      'AM4',     'DDR4', NULL),
-(11, 'ASUS PRIME Z790-P',                'Motherboard', 'ASUS',     'LGA1700', 'DDR5', NULL),
-(12, 'Gigabyte B660M DS3H DDR4',         'Motherboard', 'Gigabyte', 'LGA1700', 'DDR4', NULL),
-(13, 'NVIDIA GeForce RTX 4060',          'GPU', 'NVIDIA', NULL, NULL, 550),
-(14, 'NVIDIA GeForce RTX 4070 Super',    'GPU', 'NVIDIA', NULL, NULL, 650),
-(15, 'NVIDIA GeForce RTX 3080',          'GPU', 'NVIDIA', NULL, NULL, 750),
-(16, 'AMD Radeon RX 7800 XT',            'GPU', 'AMD',    NULL, NULL, 700),
-(17, 'AMD Radeon RX 6600',               'GPU', 'AMD',    NULL, NULL, 450),
-(18, 'NVIDIA GeForce GTX 1660 Super',    'GPU', 'NVIDIA', NULL, NULL, 450),
-(19, 'Corsair Vengeance 32GB DDR5-6000', 'RAM', 'Corsair',  NULL, 'DDR5', NULL),
-(20, 'G.Skill Ripjaws 16GB DDR4-3200',   'RAM', 'G.Skill',  NULL, 'DDR4', NULL),
-(21, 'Kingston Fury Beast 32GB DDR5-5600','RAM','Kingston', NULL, 'DDR5', NULL),
-(22, 'Corsair LPX 32GB DDR4-3600',       'RAM', 'Corsair',  NULL, 'DDR4', NULL),
-(23, 'Corsair RM650 650W',               'PSU', 'Corsair',  NULL, NULL, 650),
-(24, 'NZXT C550 550W',                   'PSU', 'NZXT',     NULL, NULL, 550),
-(25, 'EVGA SuperNOVA 750 GQ',            'PSU', 'EVGA',     NULL, NULL, 750),
-(26, 'Samsung 980 Pro 1TB NVMe',         'Storage', 'Samsung', NULL, NULL, NULL),
-(27, 'WD Blue SN580 500GB NVMe',         'Storage', 'WD',      NULL, NULL, NULL);
-
 
 
 --
@@ -204,7 +171,7 @@ INSERT INTO 'parts' (part_id, name, category, brand, socket, memory_type, power_
 -- Indexes for table `listings`
 --
 ALTER TABLE `listings`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`listing_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -214,7 +181,7 @@ ALTER TABLE `listings`
 -- AUTO_INCREMENT for table `listings`
 --
 ALTER TABLE `listings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `listing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
