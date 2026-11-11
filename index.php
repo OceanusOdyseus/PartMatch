@@ -1,20 +1,15 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "partmatch");
+require_once "db.php";
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql = "SELECT * FROM listings
-        WHERE status = 'available'
-        ORDER BY date_time DESC
-        LIMIT 3";
-
-$result = mysqli_query($conn, $sql);
-
-if (!$result) {
-    die("Query failed: " . mysqli_error($conn));
-}
+$stmt = $pdo->query(
+    "SELECT l.listing_id, l.asking_price, l.part_condition, l.location, p.name AS part_name
+    FROM listings l
+    JOIN parts p ON p.part_id = l.part_id
+    WHERE l.status = 'available'
+    ORDER BY l.date_time DESC
+    LIMIT 3"
+);
+$listings = $stmt->fetchALL();
 ?>
 
 <!DOCTYPE html>
@@ -40,47 +35,38 @@ if (!$result) {
     <main class="non-search-main">
         <section class="searchBar">
             <form action="search.php" method="GET">
-                <input type="text" name="search"
+                <input type="text" name="q"
                     placeholder="Search for PC parts">
                 <button type="submit">Search</button>
             </form>
 
-            <!--<div class="categories">  used for quick navigation, feature not yet implemented in search.php 
+            <div class="categories"> 
                 <a href="search.php">GPU</a>
                 <a href="search.php">CPU</a>
                 <a href="search.php">PSU</a>
                 <a href="search.php">RAM</a>
                 <a href="search.php">Storage</a>
                 <a href="search.php">Motherboard</a>
-            </div> -->
+            </div>
         </section>
 
         <section class="recentListings">
             <h2>Recent Listings</h2>
+            <?php if(count($listings) === 0) { ?>
+                    <p> No listing yet. <a href="create_listing.php">Be the first.</a></p>
+            <?php } ?>
             <div class="listingGrid">
-                <?php while($row = mysqli_fetch_assoc($result)) { ?>
-
-                    <div class="card">
-                        
-                        <?php if(!empty($row['image1_data'])) { ?>
-                            <img
-                                src="data:image/jpeg;base64,<?php
-                                    echo base64_encode($row['image1_data']);
-                                ?>" 
-                                alt="PC part" 
-                            >  
-                        <?php } else { ?>
-                            <img 
-                                src="image/default-part.jpg"
-                                alt="Default PC part image"
-                            >
-                        <?php } ?>
-
-                        <h3>PC part: <?php echo htmlspecialchars($row['part_name']); ?></h3>
-                        <p>Price: $<?php echo htmlspecialchars($row['asking_price']); ?></p>
-                        <p>Condition: <?php echo htmlspecialchars($row['part_condition']); ?></p>
-                        <p>Location: <?php echo htmlspecialchars($row['location']); ?></p>
-                    </div>
+                <?php foreach($listings as $row){ ?>
+                   <a class="card" href="listing.php?id=<?php echo (int)$row['listing_id']; ?>">
+                    <img
+                        src="image/default-part.jpg"
+                        alt="Default PC part image"
+                    >
+                    <h3>PC part: <?php echo input($row['part_name']); ?></h3>
+                    <p>Price: $<?php echo input($row['asking_price']); ?></p>
+                    <p>Condition: <?php echo input(condition_label($row['part_condition'])); ?></p>
+                    <p>Location: <?php echo input($row['location']); ?></p>
+                    </a>
                 <?php } ?>                
             </div>
         </section>
@@ -91,4 +77,6 @@ if (!$result) {
     </footer>
 </body>
 </html>
+
+
 

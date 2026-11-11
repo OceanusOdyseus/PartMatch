@@ -4,20 +4,24 @@
 require_once "db.php";
 
 $message = "";
+//getting parts for the dorpdown list for part pick
+$parts = $pdo->query("SELECT part_id, name, category FROM parts ORDER BY category, name")->fetchALL();
+$validPartIds = array_column($parts, "part_id");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $seller_id = 104;
+    $seller_id = CURRENT_USER_ID;
     $part_id = trim($_POST["part_id"] ?? "");
     $asking_price = $_POST["asking_price"] ?? "";
     $part_condition = $_POST["part_condition"] ?? "";
     $location = trim($_POST["location"] ?? "");
 
     if (
-        $part_id === "" ||
+        !in_array($part_id, $validPartIds) ||
         !is_numeric($asking_price) ||
         $asking_price < 0 ||        
-        $part_condition === "" ||
-        $location === ""
+        !array_key_exists($part_condition, CONDITIONS) ||
+        $location === "" ||
+        strlen($location) > 50
     ) {
 
         $message = "Please enter valid information in all fields.";
@@ -88,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php if ($message !== ""): ?>
 
                 <p class="message">
-                    <?php echo htmlspecialchars($message, ENT_QUOTES, "UTF-8"); ?>
+                    <?php echo input($message); ?>
                 </p>
 
             <?php endif; ?>
@@ -98,12 +102,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="form-group">
                     <label for="part_id">Part ID:</label>
 
-                    <input
-                        type="text"
-                        id="part_id"
-                        name="part_id"
-                        placeholder="Enter part ID"
-                        required>
+                    <select id="part_id" name="part_id" required>
+                        <option value="">Select a part</option>
+                        <?php foreach ($parts as $p){ ?>
+                            <option value="<?php echo (int)$p['part_id']; ?>">
+                                <?php echo input($p['category'] . " - ". $p['name']); ?>
+                            </option>
+                        <?php } ?>
+                    </select>
                 </div>
 
                 <div class="form-group">
