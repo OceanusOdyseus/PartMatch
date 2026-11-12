@@ -42,7 +42,9 @@ CREATE TABLE `listings` (
   `image2_name` varchar(100) DEFAULT NULL,
   `image2_data` mediumblob DEFAULT NULL,
   `image3_name` varchar(100) DEFAULT NULL,
-  `image3_data` mediumblob DEFAULT NULL
+  `image3_data` mediumblob DEFAULT NULL,
+  FOREIGN KEY (seller_id) REFERENCES users(user_id),
+  FOREIGN KEY (part_id) REFERENCES parts(part_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
