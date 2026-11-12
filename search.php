@@ -38,7 +38,7 @@ if (!$result) {
 </head>
 <body>
     <header class="search-header">
-        <h1><a href="index.php">PartMatch</a></h1>
+        <h1><a href="index.php" class="logo">PartMatch</a></h1>
 
         <form class="search" method="GET" action="search.php">
             <input type="search" name="search" placeholder="Search for PC parts (Hint: Type ID #)">
