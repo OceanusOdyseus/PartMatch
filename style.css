@@ -200,7 +200,7 @@ footer {
 }
 
 
-/*Search Results Section*/
+/*---------------------------------------------------------------------------------Search Results Section---------------------------------------------------------------------------------*/
 .search-header{
     background-color:var(--color-black);
     display: flex;
@@ -259,7 +259,7 @@ footer {
     width: 180px;
     background-color: var(--color-black);
     color: var(--color-white);
-    border: 1px solid var(--color-red);
+    border: 2px solid var(--color-red);
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
@@ -308,11 +308,106 @@ footer {
     border: 2px solid var(--color-red);
 }
 
+
+/*Card*/
+.searchcard-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.searchcard{
+    border: 2px solid var(--color-red);
+    background-color: var(--color-black);
+    padding: 15px;
+    flex: 1 1 220px;
+    max-width: 300px;
+    min-height: 300px;
+    text-align: left;
+}
+
+
+
 /*Footer*/
 .search-footer {
     padding: 15px;
     text-align: center;
     background-color:var(--color-black);
+    border-top: 2px solid var(--color-red);
+    color: var(--color-white);
+}
+
+
+/*---------------------------------------------------------------------------------Profile---------------------------------------------------------------------------------*/
+
+
+.profile-header{
+    background-color: var(--color-black);
+    display: flex;
+    padding: 20px;
+    border-bottom: 2px solid var(--color-red);
+    align-items: center;
+}
+
+
+.profile-header h1 a{
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.profile-header h1 a:hover{
+    color: var(--color-red);
+}
+
+.profile-header nav{
+    margin-left: auto;
+}
+.profile-header nav a{
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.profile-header nav a:hover{
+    color: var(--color-red);
+}
+
+.profile-body{
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.profile-row{
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+}
+
+.profile-left {
+    width: 30%;
+    background-color: var(--color-black);
+    border: 2px solid var(--color-red);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+}
+
+.profile-icon {
+    font-size: 100px;
+    margin-bottom: 15px;
+}
+
+.profile-right {
+    width: 70%;
+    background-color: var(--color-black);
+    border: 2px solid var(--color-red);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.search-footer {
+    padding: 15px;
+    text-align: center;
+    background-color: var(--color-black);
     border-top: 2px solid var(--color-red);
     color: var(--color-white);
 }

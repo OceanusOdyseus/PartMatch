@@ -108,9 +108,9 @@ if (!$result) {
         </select>
     </div>
 
-    <div class="card-row">
+    <div class="searchcard-row">
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-            <div class="card">
+            <div class="searchcard">
                 <h3>PC Part #<?php echo $row['part_id']; ?></h3>
                 <p>Price: $<?php echo $row['asking_price']; ?></p>
                 <p>Condition: <?php echo $row['part_condition']; ?></p>
