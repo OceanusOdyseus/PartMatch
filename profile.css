@@ -32,6 +32,7 @@ header nav a:hover{
 body{
     background-color: black;
     color: white;
+    font-family: Arial, sans-serif;
 }
 
 .profile-row{
