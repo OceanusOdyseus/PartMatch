@@ -15,7 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $part_condition = $_POST["part_condition"] ?? "";
     $location = trim($_POST["location"] ?? "");
 
-    if (
+    //Added limit for how many listings I user can make
+    $recent = $pdo->prepare( "SELECT COUNT(*) FROM listings WHERE seller_id = ? AND date_time > NOW() - INTERVAL 1 HOUR");
+    $recent->execute([$seller_id]);
+    $tooMany = $recent->fetchColumn() >= 5;
+    if($tooMany){
+        $message = "You have reached the limit of 5 new listing per hour";
+    }
+    elseif (
         !in_array($part_id, $validPartIds) ||
         !is_numeric($asking_price) ||
         $asking_price < 0 ||        
