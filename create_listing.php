@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $asking_price = $_POST["asking_price"] ?? "";
     $part_condition = $_POST["part_condition"] ?? "";
     $location = trim($_POST["location"] ?? "");
+    $description = trim($_POST["description"] ?? "");
 
     //Added limit for how many listings I user can make
     $recent = $pdo->prepare( "SELECT COUNT(*) FROM listings WHERE seller_id = ? AND date_time > NOW() - INTERVAL 1 HOUR");
@@ -28,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $asking_price < 0 ||        
         !array_key_exists($part_condition, CONDITIONS) ||
         $location === "" ||
-        strlen($location) > 50
+        strlen($location) > 50 ||
+        strlen($description) > 100
     ) {
 
         $message = "Please enter valid information in all fields.";
@@ -36,8 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
 
         $sql = "INSERT INTO listings
-            (seller_id, part_id, asking_price, part_condition, status, location)
-            VALUES (?, ?, ?, ?, ?, ?)";
+            (seller_id, part_id, asking_price, part_condition, status, location, description)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
 
@@ -48,7 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $asking_price,
                 $part_condition,
                 "available",
-                $location
+                $location,
+                $description
             ]);
             $message = "Listing successfully created!";
 
@@ -152,6 +155,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         name="location"
                         placeholder="Enter city and state"
                         required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description (optional):</label>
+
+                    <input
+                        type="text"
+                        id="description"
+                        name="description"
+                        maxlength ="100"
+                        placeholder="Example: Works well, no issues">
                 </div>
 
                 <div class="publish-button">
