@@ -79,7 +79,6 @@ if($listing){
                 <?php if($listing["description"] !== "") { ?>
                     <p><?php echo input($listing["description"]); ?></p>
                 <?php } ?>
-                //contact button for get contact
                 <?php if ($contact) { ?> 
                     <div class="contact-box">
                         <h3>Contact <?php echo input($listing["seller_name"]); ?></h3>
