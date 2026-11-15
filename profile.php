@@ -76,6 +76,18 @@ $myStmt = $pdo->prepare(
 );
 $myStmt->execute([CURRENT_USER_ID]);
 $myListings = $myStmt->fetchAll();
+
+//checks compatability with the inputted with cpu and motherboard
+$buildParts = get_build($pdo, CURRENT_USER_ID);
+$buildNote = "";
+
+if($buildParts["cpu"] && $buildParts["mb"]){
+    if(check_compat($buildParts["cpu"], $buildParts)){
+        $buildNote = "Your build is Compatible.";
+    }else {
+        $buildNote = "Warnings: your CPU and motherboard are not compatible";
+    }
+}
 ?>
 
 
@@ -131,6 +143,10 @@ $myListings = $myStmt->fetchAll();
             <div class="profile-info">
                 <h3>My Build</h3>
                 <p>Save your parts. Listings will show compatibility</p>
+
+                <?php if($buildNote !== ""){ ?>
+                    <p class="message"><?php echo input($buildNote); ?></p>
+                <?php }?>
 
                 <form action="profile.php" method="POST">
                     <?php foreach($slots as $field => $slot){ ?>
