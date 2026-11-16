@@ -272,7 +272,14 @@ footer {
 
 .filter-group input[type=number]{
     padding: 8px;
-    width: 35px;
+    width: 50px;
+    height: 10px;
+    border: 2px solid var(--color-red);
+}
+
+.filter-group input[type=text]{
+    padding: 8px;
+    width: 155px;
     height: 10px;
     border: 2px solid var(--color-red);
 }
@@ -289,6 +296,16 @@ footer {
     padding: 10px 18px;
     margin-left: 25px;
     display: flex;
+}
+
+.filter-group a{
+    margin-left: 30px;
+    text-decoration: none;
+    color: var(--color-white)
+}
+
+.filter-group a:hover{
+    color: var(--color-red)
 }
 
 
