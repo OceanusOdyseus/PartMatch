@@ -41,12 +41,12 @@ $listings = $stmt->fetchALL();
             </form>
 
             <div class="categories"> 
-                <a href="search.php">GPU</a>
-                <a href="search.php">CPU</a>
-                <a href="search.php">PSU</a>
-                <a href="search.php">RAM</a>
-                <a href="search.php">Storage</a>
-                <a href="search.php">Motherboard</a>
+                <a href="search.php?category=GPU">GPU</a>
+                <a href="search.php?category=CPU">CPU</a>
+                <a href="search.php?category=PSU">PSU</a>
+                <a href="search.php?category=RAM">RAM</a>
+                <a href="search.php?category=Storage">Storage</a>
+                <a href="search.php?category=Motherboard">Motherboard</a>
             </div>
         </section>
 
