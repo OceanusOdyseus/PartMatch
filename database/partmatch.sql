@@ -24,30 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `listings`
---
-
-CREATE TABLE `listings` (
-  `listing_id` int PRIMARY KEY AUTO_INCREMENT,
-  `seller_id` int(11) NOT NULL,
-  `part_id` int(11) NOT NULL,
-  `asking_price` decimal(10,2) NOT NULL,
-  `part_condition` varchar(20) NOT NULL,
-  `status` varchar(20) NOT NULL,
-  `location` varchar(50) NOT NULL,
-  `description` varchar(100) NOT NULL, 
-  `date_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `image1_name` varchar(100) DEFAULT NULL,
-  `image1_data` mediumblob DEFAULT NULL,
-  `image2_name` varchar(100) DEFAULT NULL,
-  `image2_data` mediumblob DEFAULT NULL,
-  `image3_name` varchar(100) DEFAULT NULL,
-  `image3_data` mediumblob DEFAULT NULL,
-  FOREIGN KEY (seller_id) REFERENCES users(user_id),
-  FOREIGN KEY (part_id) REFERENCES parts(part_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
 -- Table structure for table `users`
 --
 
@@ -72,6 +48,33 @@ CREATE TABLE parts(
   memory_type VARCHAR(10) NULL,
   power_watts INT NULL
 );
+
+
+--
+-- Table structure for table `listings`
+--
+
+CREATE TABLE `listings` (
+  `listing_id` int PRIMARY KEY AUTO_INCREMENT,
+  `seller_id` int(11) NOT NULL,
+  `part_id` int(11) NOT NULL,
+  `asking_price` decimal(10,2) NOT NULL,
+  `part_condition` varchar(20) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `location` varchar(50) NOT NULL,
+  `description` varchar(100) NOT NULL DEFAULT '', 
+  `date_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `image1_name` varchar(100) DEFAULT NULL,
+  `image1_data` mediumblob DEFAULT NULL,
+  `image2_name` varchar(100) DEFAULT NULL,
+  `image2_data` mediumblob DEFAULT NULL,
+  `image3_name` varchar(100) DEFAULT NULL,
+  `image3_data` mediumblob DEFAULT NULL,
+  FOREIGN KEY (seller_id) REFERENCES users(user_id),
+  FOREIGN KEY (part_id) REFERENCES parts(part_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 
 --
 -- Table structure for table `user_builds`
@@ -120,10 +123,22 @@ INSERT INTO parts (part_id, name, category, brand, socket, memory_type, power_wa
 (26, 'Samsung 980 Pro 1TB NVMe',         'Storage', 'Samsung', NULL, NULL, NULL),
 (27, 'WD Blue SN580 500GB NVMe',         'Storage', 'WD',      NULL, NULL, NULL);
  
+
+
+
+--
+-- Dumping data for table `users`
+--
+INSERT INTO users (user_id, username, email, phone, location) VALUES
+(101, 'Nicholas Born', 'Born2BGreat@example.com', '243-0943', 'Maple Grove, Minnesota'),
+(102, 'Jordan Michael', 'jordan2Be@example.edu', '672,9021', 'Chicago, Illinios'),
+(103, 'Cash Money', 'rich2rags@example.com', '907-8742', 'Los Angeles, California'),
+(104, 'Henry Holiday', 'HenryHoliday2@example.com', '987-234', 'Richmond, Virginia'),
+(105, 'Leclerc Rozman', 'F1enjoyer294@example.com', '169-3215', 'Portland, Oregon');
+
 --
 -- Dumping data for table `listings` (USED AI to generate listings)
 --
-
 INSERT INTO listings (seller_id, part_id, asking_price, part_condition, status, location, description, date_time) VALUES
 (101, 2,  329.00, 'new-in-box', 'available', 'Maple Grove, Minnesota', 'Sealed retail box, bought a spare.', NOW() - INTERVAL 1 DAY),
 (101, 7,  189.99, 'used', 'available', 'Maple Grove, Minnesota', 'Ran for six months, no bent pins.', NOW() - INTERVAL 2 DAY),
@@ -154,38 +169,13 @@ INSERT INTO listings (seller_id, part_id, asking_price, part_condition, status, 
 
 
 
---
--- Dumping data for table `users`
---
-INSERT INTO users (user_id, username, email, phone, location) VALUES
-(101, 'Nicholas Born', 'Born2BGreat@example.com', '243-0943', 'Maple Grove, Minnesota'),
-(102, 'Jordan Michael', 'jordan2Be@example.edu', '672,9021', 'Chicago, Illinios'),
-(103, 'Cash Money', 'rich2rags@example.com', '907-8742', 'Los Angeles, California'),
-(104, 'Henry Holiday', 'HenryHoliday2@example.com', '987-234', 'Richmond, Virginia'),
-(105, 'Leclerc Rozman', 'F1enjoyer294@example.com', '169-3215', 'Portland, Oregon');
 
 
---
--- Indexes for dumped tables
---
+INSERT INTO user_builds (user_id, cpu_part_id, gpu_part_id, motherboard_part_id)
+VALUES (104, 2, 14, 7);
 
---
--- Indexes for table `listings`
---
-ALTER TABLE `listings`
-  ADD PRIMARY KEY (`listing_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `listings`
---
-ALTER TABLE `listings`
-  MODIFY `listing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
-
+ 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
