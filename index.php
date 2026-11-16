@@ -41,12 +41,12 @@ $listings = $stmt->fetchALL();
             </form>
 
             <div class="categories"> 
-                <a href="search.php">GPU</a>
-                <a href="search.php">CPU</a>
-                <a href="search.php">PSU</a>
-                <a href="search.php">RAM</a>
-                <a href="search.php">Storage</a>
-                <a href="search.php">Motherboard</a>
+                <a href="search.php?category=GPU">GPU</a>
+                <a href="search.php?category=CPU">CPU</a>
+                <a href="search.php?category=PSU">PSU</a>
+                <a href="search.php?category=RAM">RAM</a>
+                <a href="search.php?category=Storage">Storage</a>
+                <a href="search.php?category=Motherboard">Motherboard</a>
             </div>
         </section>
 
@@ -58,11 +58,7 @@ $listings = $stmt->fetchALL();
             <div class="listingGrid">
                 <?php foreach($listings as $row){ ?>
                    <a class="card" href="listing.php?id=<?php echo (int)$row['listing_id']; ?>">
-                    <img
-                        src="image/default-part.jpg"
-                        alt="Default PC part image"
-                    >
-                    <h3>PC part: <?php echo input($row['part_name']); ?></h3>
+                    <h3><?php echo input($row['part_name']); ?></h3>
                     <p>Price: $<?php echo input($row['asking_price']); ?></p>
                     <p>Condition: <?php echo input(condition_label($row['part_condition'])); ?></p>
                     <p>Location: <?php echo input($row['location']); ?></p>

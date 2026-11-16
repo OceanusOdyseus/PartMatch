@@ -184,7 +184,7 @@ foreach($rows as $row){
 <!--Apply or clear filter!-->
         <div class="filter-group">
             <button type="submit">Apply Filters</button>
-            <a href="search.php">Clear all Filters</a>
+            <a class="clear-button" href="search.php">Clear all Filters</a>
         </div>
     </form>
 
