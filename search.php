@@ -198,7 +198,7 @@ foreach($rows as $row){
         <?php foreach ($results as $row) { ?>
             <a class="searchcard" href="listing.php?id=<?php echo (int)$row["listing_id"]; ?>">
                 <h3><?php echo input($row["name"]); ?></h3>
-                <?php echo compat_notification($row["name"]); ?>
+                <?php echo compat_notification($row["compat"]); ?>
                 <p>Price: $<?php echo number_format((float)$row["asking_price"],2); ?></p>
                 <p>Condition: <?php echo input(condition_label($row["part_condition"])); ?></p>
                 <p>Location: <?php echo input($row['location']); ?></p>
