@@ -97,7 +97,7 @@ foreach($rows as $row){
 </head>
 <body>
     <header class="search-header">
-        <h1><a href="index.php">PartMatch</a></h1>
+        <h1><a href="index.php" class="logo">PartMatch</a></h1>
 
         <form class="search" method="GET" action="search.php">
             <input type="search" name="q" value="<?php echo input($q); ?>" placeholder="Search for PC parts">

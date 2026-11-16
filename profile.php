@@ -105,7 +105,7 @@ if($buildParts["cpu"] && $buildParts["mb"]){
 <body class="profile-body">
 
     <header class="profile-header">
-        <h1><a href="index.php">PartMatch</a></h1>
+        <h1><a href="index.php" class="logo">PartMatch</a></h1>
 
         <nav>
             <a href="index.php">Home</a>
