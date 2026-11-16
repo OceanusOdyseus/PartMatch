@@ -95,13 +95,12 @@ foreach($rows as $row){
     <title>Search</title>
     <link rel="stylesheet" href="style.css">   
 </head>
- <!-------------------------------------Page Header!------------------------------------->
 <body>
     <header class="search-header">
-        <h1><a href="index.php" class="logo">PartMatch</a></h1>
+        <h1><a href="index.php">PartMatch</a></h1>
 
         <form class="search" method="GET" action="search.php">
-            <input type="search" name="q" value="<?php echo input($q); ?>" placeholder="Search for PC parts (Hint: Type ID #)">
+            <input type="search" name="q" value="<?php echo input($q); ?>" placeholder="Search for PC parts">
             <button type="submit">Search</button>
         </form>
 
@@ -111,7 +110,7 @@ foreach($rows as $row){
         </nav>
 
     </header>
- <!-------------------------------------Side Filter!------------------------------------->
+
 <main class="search-main">
     <form id="filterform" class="search-filter" method="GET" action="search.php">
         <h3>Filters</h3>
@@ -133,10 +132,10 @@ foreach($rows as $row){
         
         <div class="filter-group">
             <h4>Price</h4>
-            $<input type="number" name="min" value="<?php echo input($min); ?>"> min -
-            $<input type="number" name="max" value="<?php echo input($max); ?>"> max
+            $<input type="number" name="min" min=0 placeholder="min" value="<?php echo input($min); ?>">
+            $<input type="number" name="max" min=0 placeholder="max" value="<?php echo input($max); ?>">
         </div>
-<!--Filters out by condition!-->
+
         <div class="filter-group">
             <h4>Condition</h4>
             <select name="condition">
@@ -149,19 +148,6 @@ foreach($rows as $row){
             </select>
         </div>
 
-            <select name="condition">
-                <option value="" <?php if (isset($_GET['condition']) && $_GET['condition'] == "") echo "selected";?>>All Conditions</option>
-
-                <option value="New in Box" <?php if (isset($_GET['condition']) && $_GET['condition'] == "New in Box") echo "selected";?>>New in Box</option>
-
-                <option value="Used" <?php if (isset($_GET['condition']) && $_GET['condition'] == "Used") echo "selected";
-                ?>>Used</option>
-
-                <option value="Broken" <?php
-                    if (isset($_GET['condition']) && $_GET['condition'] == "Broken") echo "selected"; ?>>Broken</option>
-            </select>
-        </div>
-<!--Filters out by Location!-->
         <div class="filter-group">
             <h4>Brand</h4>
             <select name="brand">
@@ -173,7 +159,7 @@ foreach($rows as $row){
                 <?php } ?>
             </select>
         </div>
-<!--Filters out by Compatability (Does nothing at the moment)!-->
+
         <div class="filter-group">
             <h4>Compatability Checker</h4>
             <label>
@@ -181,7 +167,7 @@ foreach($rows as $row){
                 Only parts that fit my build
             </label>
         </div>
-<!--Apply or clear filter!-->
+
         <div class="filter-group">
             <button type="submit">Apply Filters</button>
             <a class="clear-button" href="search.php">Clear all Filters</a>
@@ -190,7 +176,6 @@ foreach($rows as $row){
 
 
 <section class="search-result">
-<!--This part is the header section for the cards (right is the text that gives the text and left is the filtering part)!-->
     <div class="result-header">
         <h3>
             <?php echo count($results); ?> Search Results
@@ -205,23 +190,6 @@ foreach($rows as $row){
         </select>
     </div>
 
-<!--This code chunck focuses on sorting rather than filtering!-->
-<form method="GET" action="search.php">
-
-    <input type="hidden" name="search"
-           value="<?php echo htmlspecialchars($search); ?>">
-
-    <select name="sort" onchange="this.form.submit()">
-        <option value="" <?php if (!isset($_GET['sort']) || $_GET['sort'] == "") echo "selected"; ?>>Sort: Default</option>
-
-        <option value="low" <?php if (isset($_GET['sort']) && $_GET['sort'] == "low") echo "selected"; ?>>Sort: Low to High</option>
-
-        <option value="high" <?php if (isset($_GET['sort']) && $_GET['sort'] == "high") echo "selected"; ?>>Sort: High to Low</option>
-    </select>
-
-</form>
-    </div>
-<!--Display card/pc parts with information!-->
     <div class="searchcard-row">
         <?php if (count($results) === 0){ ?>
             <p>No listing match your search.</p>
@@ -242,5 +210,9 @@ foreach($rows as $row){
 </main>
 
 <footer class="search-footer">&copy; 2026 PartMatch</footer>
+
+
+
+
 </body>
 </html>

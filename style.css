@@ -24,7 +24,6 @@ body {
     max-width: 700px;
     margin: 40px auto;
     padding: 20px;
-    flex: 1;
 }
 
 header {
@@ -46,7 +45,7 @@ header h1 a{
 .logo {
     color: var(--color-white);
     text-decoration: none;
-    font-size: 35px;
+    font-size: 24px;
     font-weight: bold;
 }
 
@@ -291,16 +290,6 @@ footer {
     display: flex;
 }
 
-.filter-group a{
-    margin-left: 30px;
-    text-decoration: none;
-    color: var(--color-white)
-}
-
-.filter-group a:hover{
-    color: var(--color-red)
-}
-
 
 /*results*/
 .search-result{
@@ -380,6 +369,11 @@ footer {
 
 .profile-header nav a:hover{
     color: var(--color-red);
+}
+
+.profile-body{
+    background-color: var(--color-black);
+    color: var(--color-white);
 }
 
 .profile-row{
