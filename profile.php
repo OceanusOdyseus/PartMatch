@@ -178,7 +178,7 @@ if($buildParts["cpu"] && $buildParts["mb"]){
                 <?php } else{ ?>
                     <?php foreach ($myListings as $row){ ?>
                         <p> 
-                            <a href="listing.php?id=<?php echo (int)$row["listing_id"]; ?>">
+                            <a class ="my-listing" href="listing.php?id=<?php echo (int)$row["listing_id"]; ?>">
                                 <?php echo input($row["name"]); ?>
                             </a>
                             - $<?php echo number_format((float)$row["asking_price"], 2); ?>

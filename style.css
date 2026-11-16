@@ -271,7 +271,7 @@ footer {
 
 .filter-group input[type=number]{
     padding: 8px;
-    width: 35px;
+    width: 55px;
     height: 10px;
     border: 2px solid var(--color-red);
 }
@@ -410,4 +410,160 @@ footer {
     background-color: var(--color-black);
     border-top: 2px solid var(--color-red);
     color: var(--color-white);
+}
+
+/*---------------------------------------------------------------------------------Compatability badge---------------------------------------------------------------------------------*/
+
+.compatNoti{
+    display: inline-block;
+    padding: 4px 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.compatNoti-ok{
+    background-color: green;
+    color: var(--color-white)
+}
+
+.compatNoti-no{
+    background-color: var(--color-red);
+    color: var(--color-white);
+}
+
+/*---------------------------------------------------------------------------------Cards links---------------------------------------------------------------------------------*/
+
+.card,
+.searchcard{
+    display: block;
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.searchcard:hover{
+    border-color: var(--color-white);
+}
+
+.card:hover{
+    border-color:var(--color-white);
+}
+
+/*---------------------------------------------------------------------------------listing page---------------------------------------------------------------------------------*/
+
+.listing-container a{
+    color: var(--color-white);
+}
+
+.listing-container a:hover{
+    color: var(--color-red);
+}
+
+.listing-container p{
+    margin: 8px 0;
+}
+
+.contact-box{
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-left: 4px solid var(--color-red);
+    border-radius: 3px;
+    padding: 12px 15px;
+    margin: 20px 0;
+}
+
+.contact-box h3{
+    margin-top: 0;
+}
+
+/*---------------------------------------------------------------------------------Search filter---------------------------------------------------------------------------------*/
+.filter-group button,
+.filter-group .clear-button{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    text-align: center;
+}
+
+.filter-group .clear-button{
+    margin-top: 10px;
+    padding: 10px 18px;
+    border: 2px solid var(--color-red);
+    border-radius: 3px;
+    background-color: transparent;
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.filter-group .clear-button:hover{
+    background-color: var(--color-red);
+}
+
+/*---------------------------------------------------------------------------------Profile---------------------------------------------------------------------------------*/
+.profile-info{
+    margin-bottom: 25px;
+}
+
+.profile-info h3{
+    margin-bottom: 8px;
+    color: var(--color-red);
+}
+
+.profile-info p{
+    margin: 6px 0;
+}
+
+.profile-info a{
+    color:var(--color-white);
+}
+
+.profile-info a:hover{
+    color: var(--color-red);
+}
+
+.profile-info form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.my-listing{
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.my-listing:hover{
+    color: var(--color-red)
+}
+
+/*---------------------------------------------------------------------------------categories---------------------------------------------------------------------------------*/
+.categories{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.categories a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    border: 2px solid var(--color-red);
+    border-radius: 50%;
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.categories a:hover{
+    color: var(--color-red);
 }
