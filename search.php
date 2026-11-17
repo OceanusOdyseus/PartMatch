@@ -97,10 +97,10 @@ foreach($rows as $row){
 </head>
 <body>
     <header class="search-header">
-        <h1><a href="index.php">PartMatch</a></h1>
+        <h1><a href="index.php" class="logo">PartMatch</a></h1>
 
         <form class="search" method="GET" action="search.php">
-            <input type="search" name="q" value="<?php echo input($q); ?>" placeholder="Search for PC parts (Hint: Type ID #)">
+            <input type="search" name="q" value="<?php echo input($q); ?>" placeholder="Search for PC parts">
             <button type="submit">Search</button>
         </form>
 
@@ -132,8 +132,8 @@ foreach($rows as $row){
         
         <div class="filter-group">
             <h4>Price</h4>
-            $<input type="number" name="min" value="<?php echo input($min); ?>"> min -
-            $<input type="number" name="max" value="<?php echo input($max); ?>"> max
+            $<input type="number" name="min" min=0 placeholder="min" value="<?php echo input($min); ?>">
+            $<input type="number" name="max" min=0 placeholder="max" value="<?php echo input($max); ?>">
         </div>
 
         <div class="filter-group">
