@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <nav>
             <a href="index.php">Home</a>
             <a href="search.php">Search</a>
-            <a href="create_listing.php">Create Listing</a>
+            <a href="profile.php">Profile</a>
         </nav>
     </header>
 

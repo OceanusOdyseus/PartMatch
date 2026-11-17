@@ -81,12 +81,20 @@ $myListings = $myStmt->fetchAll();
 $buildParts = get_build($pdo, CURRENT_USER_ID);
 $buildNote = "";
 
+//checks compatability of parts that users picked
 if($buildParts["cpu"] && $buildParts["mb"]){
     if(check_compat($buildParts["cpu"], $buildParts)){
         $buildNote = "Your build is Compatible.";
     }else {
-        $buildNote = "Warnings: your CPU and motherboard are not compatible";
+        $buildNote = "Warnings: your CPU and motherboard are not compatible, Compatability Checker may not work.";
     }
+}
+
+//Mark one of the listing as sold
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["mark_sold"])){
+    $stmt = $pdo ->prepare("UPDATE listings SET status = 'sold' WHERE listing_id = ? AND seller_id =?");
+    $stmt->execute([(int)$_POST["mark_sold"], CURRENT_USER_ID]);
+    $message = "Listing marked as sold.";
 }
 ?>
 
@@ -108,7 +116,6 @@ if($buildParts["cpu"] && $buildParts["mb"]){
         <h1><a href="index.php">PartMatch</a></h1>
 
         <nav>
-            <a href="index.php">Home</a>
             <a href="search.php">&emsp;Search</a>
             <a href="create_listing.php">&emsp;Create Listing</a>
         </nav>
@@ -184,6 +191,11 @@ if($buildParts["cpu"] && $buildParts["mb"]){
                             - $<?php echo number_format((float)$row["asking_price"], 2); ?>
                             (<?php echo input(ucfirst($row["status"])); ?>)
                         </p>
+                        <?php if($row["status"] === "available") { ?>
+                            <form action="profile.php" method="POST">
+                                <button type="submit" name ="mark_sold" value="<?php echo (int)$row["listing_id"]; ?>">Mark as sold</button>
+                            </form>    
+                        <?php } ?>   
                     <?php } ?>
                 <?php } ?>
             </div>
