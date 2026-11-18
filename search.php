@@ -14,7 +14,7 @@ $onlyCompat = isset($_GET["compat"]);
 //dropdown for brand
 $brands = $pdo->query("SELECT DISTINCT brand FROM parts ORDER BY brand")->fetchAll(PDO::FETCH_COLUMN);
 
-//Build the WHERE part one filter at a time
+//Build the WHERE part, one filter at a time
 $where = ["l.status = 'available'"];
 $params = [];
 
@@ -59,11 +59,12 @@ if(is_numeric($max)){
 $sorts = ["low" => "l.asking_price ASC", "high" => "l.asking_price DESC"];
 $orderBy = $sorts[$sort] ?? "l.date_time DESC";
 
+//reads the array and adds and "AND" as operators on it
 $sql = "SELECT l.listing_id, l.asking_price, l.part_condition, l.location,
             p.name, p.category, p.brand, p.socket, p.memory_type, p.power_watts
         FROM listings l
         JOIN parts p ON p.part_id = l.part_id
-        WHERE " . implode(" AND ", $where) . "
+        WHERE " . implode(" AND ", $where) . " 
         ORDER BY " . $orderBy;
 
 $stmt = $pdo->prepare($sql);
@@ -78,7 +79,7 @@ $results = [];
 foreach($rows as $row){
     $row["compat"] = $hasBuild ? check_compat($row, $build): null;
 
-    //"Compatability checker box checked
+    //when Compatability checker box checked
     if($onlyCompat && $row["compat"] !== true){
         continue;
     }

@@ -95,6 +95,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["mark_sold"])){
     $stmt = $pdo ->prepare("UPDATE listings SET status = 'sold' WHERE listing_id = ? AND seller_id =?");
     $stmt->execute([(int)$_POST["mark_sold"], CURRENT_USER_ID]);
     $message = "Listing marked as sold.";
+    header("Location: profile.php");
+    exit;
 }
 ?>
 

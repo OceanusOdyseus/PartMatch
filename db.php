@@ -56,32 +56,37 @@ function get_build(PDO $pdo, int $userID): array{
     return $build;
 }
 
-function build_is_empty(array $build): bool{
+//checks if user builds are empty
+function build_is_empty(array $build): bool{ 
     return !$build["cpu"] && !$build['gpu'] && !$build["mb"];
 }
 
+//checks compatability of the users systems with the parts they want to buy
+//return: if compat true then return true
+//        if compat false then return false
+//        if compat there is no parts or the system can't determine true/false return nulls
 function check_compat(array $item, array $build): ?bool{
-    if($item["category"] === "CPU"){
+    if($item["category"] === "CPU"){ //logic for cpu mother compat
         if($build["mb"]){
             return $item["socket"] === $build["mb"]["socket"];
         }else{
             return null;
         }
-    }elseif($item["category"] === "Motherboard"){
+    }elseif($item["category"] === "Motherboard"){ //logic for motherboard cpu
         if($build["cpu"]){
             return $item["socket"] === $build["cpu"]["socket"];
         }else{
             return null;
         }
 
-    }elseif($item["category"] === "RAM"){
+    }elseif($item["category"] === "RAM"){ //logic for ram and motherboard
         if($build["mb"]){
             return $item["memory_type"] === $build["mb"]["memory_type"];    
         }else{
             return null;
         }
 
-    }elseif($item["category"] === "PSU"){
+    }elseif($item["category"] === "PSU"){ //logic for PSU GPU
         if($build["gpu"]){
             return (int)$item["power_watts"] >= (int)$build["gpu"]["power_watts"];
         } else{
@@ -92,6 +97,7 @@ function check_compat(array $item, array $build): ?bool{
     }   
 }
 
+//uses compat_noti then return an html that has the compat notification
 function compat_notification(?bool $compatible): string{
     if($compatible === true){
         return '<span class= "compatNoti compatNoti-ok">Compatible with your build</span>';
