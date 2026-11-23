@@ -318,6 +318,7 @@ footer {
     gap: 20px;
     max-height: 600px;
     overflow-y: auto;
+    border: 2px solid var(--color-red);
 }
 
 .searchcard{
