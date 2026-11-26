@@ -9,6 +9,9 @@ $parts = $pdo->query("SELECT part_id, name, category FROM parts ORDER BY categor
 $validPartIds = array_column($parts, "part_id");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    //Checks if the form is too big and will throw away everything if it is
+    $sizeCheck = empty($_POST) && empty($_FILES) && (int)($_SERVER["CONTENT_LENGTH"] ?? 0) > 0;
+
     $seller_id = CURRENT_USER_ID;
     $part_id = trim($_POST["part_id"] ?? "");
     $asking_price = $_POST["asking_price"] ?? "";
@@ -16,12 +19,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $location = trim($_POST["location"] ?? "");
     $description = trim($_POST["description"] ?? "");
 
+    //checks for the uploaded photo
+    $imageError = "";
+    $imageExt = "";
+    $hasImage = isset($_FILES["image"]) && $_FILES["image"]["error"] !== UPLOAD_ERR_NO_FILE;
+    
+    if(!$hasImage){
+        $imageError = "Please add a photo of the part.";
+    }else{
+        $f = $_FILES["image"];
+        $allowed = ["image/jpeg" => "jpg"];
+
+        if($f["error"] !== UPLOAD_ERR_OK || $f["size"] > 1024 * 1024){
+            $imageError = "The photo must be 1 MB or smaller.";
+        }else{
+            //checks the file type and not by the file name the user sent
+            $mime = (new finfo(FILEINFO_MIME_TYPE))->file($f["tmp_name"]);
+            if(isset($allowed[$mime])){
+                $imageExt = $allowed[$mime];
+            }else{
+                $imageError = "The photo must be a JPG image.";
+            }
+        }
+    }
+
+
     //Added limit for how many listings I user can make
     $recent = $pdo->prepare( "SELECT COUNT(*) FROM listings WHERE seller_id = ? AND date_time > NOW() - INTERVAL 1 HOUR");
     $recent->execute([$seller_id]);
     $tooMany = $recent->fetchColumn() >= 5;
-    if($tooMany){
+    if($sizeCheck){
+        $message = "that upload is too large. Try again";
+    }
+    elseif($tooMany){
         $message = "You have reached the limit of 5 new listing per hour";
+    }
+    elseif($imageError !== ""){
+        $message = $imageError;
     }
     elseif (
         !in_array($part_id, $validPartIds) ||
@@ -36,10 +70,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $message = "Please enter valid information in all fields.";
 
     } else {
+        //Randomly generated names for images
+        $imageName = bin2hex(random_bytes(16)) . "." . $imageExt;
+        $imageData = file_get_contents($_FILES["image"]["tmp_name"]);
 
         $sql = "INSERT INTO listings
-            (seller_id, part_id, asking_price, part_condition, status, location, description)
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+            (seller_id, part_id, asking_price, part_condition, status, location, description, image1_name, image1_data)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
 
@@ -51,14 +88,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $part_condition,
                 "available",
                 $location,
-                $description
+                $description,
+                $imageName,
+                $imageData
             ]);
             $message = "Listing successfully created!";
 
         } catch (PDOException $e) {
-
-            $message = "Error creating listing: " . $e->getMessage();
-
+            if(stripos($e->getMessage(), "max_allowed_packet") !== false){
+                $message = "That photo is too large for the database. Try a smaller one";
+            }else{
+                $message = "Error creating listing: " . $e->getMessage();
+            }
         }
     }
 }
@@ -107,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <?php endif; ?>
 
-            <form action="create_listing.php" method="POST">
+            <form action="create_listing.php" method="POST" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <label for="part_id">Part ID:</label>
@@ -166,6 +207,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         name="description"
                         maxlength ="100"
                         placeholder="Example: Works well, no issues">
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Photo (JPG only, 1 MB max):</label>
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/jpeg"
+                        required>
                 </div>
 
                 <div class="publish-button">
