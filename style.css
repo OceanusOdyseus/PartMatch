@@ -461,6 +461,16 @@ footer {
     color: var(--color-white);
 }
 
+.listing-container img{
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+
 .listing-container a:hover{
     color: var(--color-red);
 }
@@ -572,3 +582,4 @@ footer {
 .categories a:hover{
     color: var(--color-red);
 }
+
