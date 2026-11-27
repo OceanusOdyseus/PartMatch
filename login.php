@@ -11,7 +11,7 @@
         <h1><a href="index.php" class="logo">PartMatch</a></h1>
     </header>
 
-    <form class="login-form" action="create_listing.php" method="POST">
+    <form class="login-form" action="profile.php" method="POST">
 
         <div class="input-group">
         <label>Username</label>
