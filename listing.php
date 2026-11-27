@@ -6,7 +6,7 @@ $id = (int)($_GET["id"] ?? 0);
 //Load this one listing with its part and seller
 $stmt = $pdo->prepare(
     "SELECT l.listing_id, l.seller_id, l.asking_price, l.part_condition, l.status,
-            l.location, l.description, l.date_time, p.name, p.category, p.brand,
+            l.location, l.description, l.date_time, l.image1_name, p.name, p.category, p.brand,
             p.socket, p.memory_type, p.power_watts,
             u.username AS seller_name
      FROM listings l
@@ -66,6 +66,10 @@ if($listing){
         <?php }else{ ?>
             <section class="listing-container">
                 <h2><?php echo input($listing["name"]); ?></h2>
+
+                <?php if($listing["image1_name"]) { ?>
+                    <img src="image.php?id=<?php echo (int)$listing["listing_id"]; ?>" alt="photo of the part">
+                <?php } ?>
                 <?php echo compat_notification($compat); ?>
 
                 <p><strong>Category:</strong> <?php echo input($listing["category"]); ?></p>
