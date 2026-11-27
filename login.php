@@ -12,6 +12,7 @@
     </header>
 
     <form class="login-form" action="create_listing.php" method="POST">
+
         <div class="input-group">
         <label>Username</label>
         <input type="text" id="username" name="username" placeholder="Enter your username" required>

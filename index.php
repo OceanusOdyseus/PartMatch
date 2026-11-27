@@ -25,8 +25,8 @@ $listings = $stmt->fetchALL();
     <header>
         <h1><a href="index.php" class="logo">PartMatch</a></h1>
         <nav>
-            <a href="create_listing.php">Create Listing</a>
-            <a href="profile.php">Profile</a>
+            <a href="login.php">Create Listing</a>
+            <a href="login.php">Profile</a>
         </nav>
     </header>
 

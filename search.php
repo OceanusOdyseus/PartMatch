@@ -106,8 +106,8 @@ foreach($rows as $row){
         </form>
 
         <nav>
-            <a href="create_listing.php">Create Listing</a>
-            <a href="profile.php">&emsp;Profile</a>
+            <a href="login.php">Create Listing</a>
+            <a href="login.php">&emsp;Profile</a>
         </nav>
 
     </header>
