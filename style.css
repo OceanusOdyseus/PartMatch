@@ -626,15 +626,6 @@ footer {
     font-size: 14px;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    border-radius: 6px;
-}
-
-
-
 .login-form button {
     width: 100%;
     padding: 12px;
@@ -705,6 +696,7 @@ footer {
     padding: 12px;
     box-sizing: border-box;
     border-radius: 6px;
+    border: 2px solid var(--color-red)
 }
 
 
